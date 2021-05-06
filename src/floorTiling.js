@@ -4,14 +4,13 @@ function calculateTileCoverage(floorLength, floorWidth, tileLength, tileWidth) {
   let lengthRatio = Math.ceil(floorLength/tileLength)
   let widthRatio = Math.ceil(floorWidth/tileWidth)
   let tileCount = lengthRatio * widthRatio
-  let percentageWaste;
+  let wastedLength = lengthRatio * tileLength - floorLength;
+  let wastedLengthArea = wastedLength * tileWidth * widthRatio;
+  let wastedWidth = widthRatio * tileWidth - floorWidth;
+  let wastedWidthArea = wastedWidth * tileLength * lengthRatio;
 
-  if(floorLength === 85 || floorWidth === 85) {
-    percentageWaste = 6
-  }
-  else {
-    percentageWaste = 0
-  }
+  let percentageWaste = Math.round((wastedLengthArea + wastedWidthArea)/(floorLength * floorWidth) * 100);
+
   return {
     tileCount: tileCount,
     percentageWaste: percentageWaste
