@@ -14,7 +14,8 @@
     "eslint": "^7.25.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint"
   },
   "author": "Hugh Cavanagh",
   "license": "ISC"
