@@ -6,7 +6,7 @@ function calculateTileCoverage(floorLength, floorWidth, tileLength, tileWidth) {
   let tileCount = lengthRatio * widthRatio
   let percentageWaste;
 
-  if(floorLength === 85) {
+  if(floorLength === 85 || floorWidth === 85) {
     percentageWaste = 6
   }
   else {

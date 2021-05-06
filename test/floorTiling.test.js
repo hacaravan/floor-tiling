@@ -35,5 +35,8 @@ describe('calculateTileCoverage', () => {
     test('returns an object with the number of tiles needed to cover the width and more than cover the length', () => {
       expect(result.tileCount).toBe(45)
     })
+    test('returns an object with the area of wasted tiles as proportion of floor to nearest whole number', () => {
+      expect(result.percentageWaste).toBe(6)
+    })
   })
 })
