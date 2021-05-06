@@ -32,3 +32,8 @@ Mismatched Length & Width with high wastage |20 | 20 | 19 | 19 | 4 | 261
 Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 
 ## Planning
+
+- Function `caclulateTileCoverage`
+- Takes list of inputs, `floorLength`, `floorWidth`, `tileLength`, `tileWidth`
+- Returns *object* with `tileCount` and `percentageWaste` properties
+- Can then be easily built on in future
