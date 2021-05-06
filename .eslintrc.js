@@ -1,7 +1,8 @@
 module.exports = {
     "env": {
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -9,5 +10,6 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-    }
+    },
+    "plugins": ["jest"],
 };

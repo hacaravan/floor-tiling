@@ -11,11 +11,12 @@
     "url": "git+https://github.com/emilybache/GildedRose-Refactoring-Kata.git"
   },
   "devDependencies": {
-    "eslint": "^7.25.0"
+    "eslint": "^7.25.0",
+    "eslint-plugin-jest": "^24.3.6"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint"
+    "test": "jest --coverage",
+    "lint": "eslint ."
   },
   "author": "Hugh Cavanagh",
   "license": "ISC"

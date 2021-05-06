@@ -30,3 +30,5 @@ Mismatched Width |45 | 85 | 3 | 30 | 45 | 6
 Mismatched Length & Width |89 | 35 | 15 | 12 | 18 | 4
 Mismatched Length & Width with high wastage |20 | 20 | 19 | 19 | 4 | 261
 Large Area |1234 | 897 | 22 | 14 | 3705 | 3
+
+## Planning
