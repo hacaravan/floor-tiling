@@ -1,0 +1,21 @@
+{
+  "name": "floor-tiling",
+  "version": "1.0.0",
+  "description": "Calculate how many tiles are needed to cover a given floor area",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^26.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilybache/GildedRose-Refactoring-Kata.git"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Hugh Cavanagh",
+  "license": "ISC"
+}
