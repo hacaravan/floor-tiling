@@ -32,7 +32,7 @@ describe('calculateTileCoverage', () => {
   })
   describe('when passed a width that does not fit perfectly & length which does', () => {
     let result = calculateTileCoverage(45, 85, 3, 30);
-    test('returns an object with the number of tiles needed to cover the width and more than cover the length', () => {
+    test('returns an object with the number of tiles needed to cover the length and more than cover the width', () => {
       expect(result.tileCount).toBe(45)
     })
     test('returns an object with the area of wasted tiles as proportion of floor to nearest whole number', () => {
