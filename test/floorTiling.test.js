@@ -14,8 +14,11 @@ describe('calculateTileCoverage', () => {
   })
   describe('when passed tile length & width which divide the floor length & width', () => {
     let result = calculateTileCoverage(80, 30, 20, 10);
-    test('Returns the number of tiles that fit into the space', () => {
+    test('Returns an object with the number of tiles that fit into the space', () => {
       expect(result.tileCount).toBe(12)
+    })
+    test('Returns an object with percentageWaste of 0', () => {
+      expect(result.percentageWaste).toBe(0)
     })
   })
 })
