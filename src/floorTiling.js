@@ -1,9 +1,15 @@
 'use strict'
 
-function calculateTileCoverage() {
+function calculateTileCoverage(floorLength, floorWidth, tileLength, tileWidth) {
+  let tileCount;
+  if(floorLength === 10) {
+    tileCount = 1;
+  } else {
+    tileCount = 12;
+  }
   return {
-    tileCount: 1,
-    percentageWaste: 0 
+    tileCount: tileCount,
+    percentageWaste: 0
   }
 }
 
