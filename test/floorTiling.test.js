@@ -87,4 +87,60 @@ describe('Floor', () => {
       expect(floor.calculatePercentageWaste()).toBe(0)
     })
   })
+  describe('effect of rotation', () => {
+    describe('when tile width divides floor width and length, tile length only divides floor length', () => {
+      let floor = new Floor(84, 100, 7, 4)
+      test('calculateTileCount() is the number needed to cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(300)
+      })
+      test('percentage waste in original orientation is 0', () => {
+        expect(floor.calculatePercentageWaste()).toBe(0)
+      })
+      test('calculateRotatedTileCount() is higher since some tiles are wasted', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(315)
+      })
+    })
+    // describe('when tile width divides floor width and length, tile length only divides floor width', () => {
+    //   let floor = new Floor(84, 100, 5, 4)
+    // })
+    // describe('when tile width divides floor width and length, tile length does not divide either', () => {
+    //   let floor = new Floor(84, 100, 9, 4)
+    // })
+    // describe('when tile width only divides floor width, tile length divides floor length and width', () => {
+    //   let floor = new Floor(84, 100, 4, 5)
+    // })
+    // describe('when tile width only divides floor width, tile length only divides floor length', () => {
+    //   let floor = new Floor(84, 100, 7, 5)
+    // })
+    // describe('when tile width only divides floor width, tile length only divides floor width', () => {
+    //   let floor = new Floor(84, 100, 5, 5)
+    // })
+    // describe('when tile width only divides floor width, tile length does not divide either', () => {
+    //   let floor = new Floor(84, 100, 9, 5)
+    // })
+    // describe('when tile width only divides floor length, tile length divides floor length and width', () => {
+    //   let floor = new Floor(84, 100, 4, 7)
+    // })
+    // describe('when tile width only divides floor length, tile length only divides floor length', () => {
+    //   let floor = new Floor(84, 100, 7, 7)
+    // })
+    // describe('when tile width only divides floor length, tile length only divides floor width', () => {
+    //   let floor = new Floor(84, 100, 5, 7)
+    // })
+    // describe('when tile width only divides floor length, tile length does not divide either', () => {
+    //   let floor = new Floor(84, 100, 9, 7)
+    // })
+    // describe('when tile width does not divide either, tile length divides floor length and width', () => {
+    //   let floor = new Floor(84, 100, 4, 9)
+    // })
+    // describe('when tile width does not divide either, tile length only divides floor length', () => {
+    //   let floor = new Floor(84, 100, 7, 9)
+    // })
+    // describe('when tile width does not divide either, tile length only divides floor width', () => {
+    //   let floor = new Floor(84, 100, 5, 9)
+    // })
+    // describe('when tile width does not divide either, tile length does not divide either', () => {
+    //   let floor = new Floor(84, 100, 9, 9)
+    // })
+  })
 })

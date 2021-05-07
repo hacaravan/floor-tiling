@@ -18,11 +18,13 @@ class Floor {
   }
 
   calculateRotatedTileCount() {
-    return this.calculateTileCount()
+    let rotatedFloor = new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
+    return rotatedFloor.calculateTileCount()
   }
 
   calculateRotatedPercentageWaste() {
-    return this.calculatePercentageWaste()
+    let rotatedFloor = new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
+    return rotatedFloor.calculatePercentageWaste()
   }
 
   lengthRatio() {
