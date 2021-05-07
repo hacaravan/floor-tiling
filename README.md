@@ -2,10 +2,7 @@
 
 ## Intro
 
-A tool to calculate how many tiles are needed to cover a given floor area, and what proportion of the tiles are wasted. This is part of a tech test i am doing for an interview.
-
-### Running the Tool
-:construction:
+A tool to calculate how many tiles are needed to cover a given floor area, and what proportion of the tiles are wasted. This is part of a tech test I am doing for an interview.
 
 ## Brief
 
@@ -32,8 +29,24 @@ Mismatched Length & Width with high wastage |20 | 20 | 19 | 19 | 4 | 261
 Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 
 ## Planning
+#### Original
+- Class `Floor`
+- Has functions `calculateTileCount` and `calculatePercentageWaste`, plus multiple small methods which these functions call on
+- On construction takes list of inputs, `floorLength`, `floorWidth`, `tileLength`, `tileWidth`
 
-- Function `caclulateTileCoverage`
-- Takes list of inputs, `floorLength`, `floorWidth`, `tileLength`, `tileWidth`
-- Returns *object* with `tileCount` and `percentageWaste` properties
-- Can then be easily built on in future
+#### Extension A
+- Added functions `calculateRotatedTileCount` and `calculateRotatedPercentageWaste`
+- Each draws on the original versions of the functions but with a new instance of the `Floor` class, with length and width of tiles swapped
+
+#### Extension B
+:construction:  
+Not yet started
+- Assuming only one direction is being reused (for now)
+- Pass in boolean of `canCutLength` in constructor
+- If `canCutLength` is true, calculate the exact division of tile length into the floor length, rather than the ceiling of this
+  - This is a slight oversimplification since it assumes you can perfectly cut the tiles at any length
+  - Also assuming that adding parts from two cut tiles is OK
+- Then multiply the number of tiles that go into the width (`widthRatio`) by this number
+- That's how many tiles will be used, but you must take the ceiling of this value
+- The wasted area is now the tile area based on the new tile count, minus the floor area
+- Doing it in the opposite orientation with `canCutWidth` should work the same
