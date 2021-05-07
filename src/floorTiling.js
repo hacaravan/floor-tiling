@@ -1,23 +1,54 @@
 'use strict'
 
-function calculateTileCoverage(floorLength, floorWidth, tileLength, tileWidth) {
-  let lengthRatio = Math.ceil(floorLength/tileLength)
-  let widthRatio = Math.ceil(floorWidth/tileWidth)
-
-  let tileCount = lengthRatio * widthRatio
-
-  let wastedLength = lengthRatio * tileLength - floorLength;
-  let wastedLengthArea = wastedLength * tileWidth * widthRatio;
-  let wastedWidth = widthRatio * tileWidth - floorWidth;
-  let wastedWidthArea = wastedWidth * tileLength * lengthRatio;
-  let wastedArea = wastedLengthArea + wastedWidthArea
-  let floorArea = floorWidth * floorLength
-  let percentageWaste = Math.round(wastedArea/floorArea * 100);
-
-  return {
-    tileCount: tileCount,
-    percentageWaste: percentageWaste
+class Floor {
+  constructor (floorLength, floorWidth, tileLength, tileWidth) {
+    this.floorLength = floorLength;
+    this.floorWidth = floorWidth;
+    this.tileLength = tileLength;
+    this.tileWidth = tileWidth;
   }
+
+  calculateTileCount() {
+    return this.lengthRatio() * this.widthRatio()
+  }
+
+  calculatePercentageWaste() {
+    let wastedProportion = this.wastedArea()/this.floorArea()
+    return Math.round(wastedProportion * 100)
+  }
+
+  lengthRatio() {
+    return Math.ceil(this.floorLength/this.tileLength)
+  }
+
+  widthRatio() {
+    return Math.ceil(this.floorWidth/this.tileWidth)
+  }
+
+  wastedLength() {
+    return this.lengthRatio() * this.tileLength - this.floorLength
+  }
+
+  wastedLengthArea() {
+    return this.wastedLength() * this.tileWidth * this.widthRatio()
+  }
+
+  wastedWidth() {
+    return this.widthRatio() * this.tileWidth - this.floorWidth
+  }
+
+  wastedWidthArea() {
+    return this.wastedWidth() * this.tileLength * this.lengthRatio()
+  }
+
+  wastedArea() {
+    return this.wastedWidthArea() + this.wastedLengthArea()
+  }
+
+  floorArea() {
+    return this.floorWidth * this.floorLength
+  }
+
 }
 
-module.exports = calculateTileCoverage
+module.exports = Floor
