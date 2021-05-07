@@ -99,13 +99,40 @@ describe('Floor', () => {
       test('calculateRotatedTileCount() is higher since some tiles are wasted', () => {
         expect(floor.calculateRotatedTileCount()).toBe(315)
       })
+      test('percentage waste when tiles are rotated is non-zero', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(5)
+      })
     })
-    // describe('when tile width divides floor width and length, tile length only divides floor width', () => {
-    //   let floor = new Floor(84, 100, 5, 4)
-    // })
-    // describe('when tile width divides floor width and length, tile length does not divide either', () => {
-    //   let floor = new Floor(84, 100, 9, 4)
-    // })
+    describe('when tile width divides floor width and length, tile length only divides floor width', () => {
+      let floor = new Floor(84, 100, 5, 4)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(425)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(1)
+      })
+      test('calculateRotatedTileCount() is lower since no tiles are wasted', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(420)
+      })
+      test('percentage waste when tiles are rotated is 0', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(0)
+      })
+    })
+    describe('when tile width divides floor width and length, tile length does not divide either', () => {
+      let floor = new Floor(84, 100, 9, 4)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(250)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(7)
+      })
+      test('calculateRotatedTileCount() is different but still more than covers the floor area', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(252)
+      })
+      test('percentage waste when tiles are rotated is still non-zero but different', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(8)
+      })
+    })
     // describe('when tile width only divides floor width, tile length divides floor length and width', () => {
     //   let floor = new Floor(84, 100, 4, 5)
     // })
