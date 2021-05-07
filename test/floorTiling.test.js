@@ -253,17 +253,65 @@ describe('Floor', () => {
         expect(floor.calculateRotatedPercentageWaste()).toBe(8)
       })
     })
-    // describe('when tile width does not divide either, tile length divides floor length and width', () => {
-    //   let floor = new Floor(84, 100, 4, 9)
-    // })
-    // describe('when tile width does not divide either, tile length only divides floor length', () => {
-    //   let floor = new Floor(84, 100, 7, 9)
-    // })
-    // describe('when tile width does not divide either, tile length only divides floor width', () => {
-    //   let floor = new Floor(84, 100, 5, 9)
-    // })
-    // describe('when tile width does not divide either, tile length does not divide either', () => {
-    //   let floor = new Floor(84, 100, 9, 9)
-    // })
+    describe('when tile width does not divide either, tile length divides floor length and width', () => {
+      let floor = new Floor(84, 100, 4, 9)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(252)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(8)
+      })
+      test('calculateRotatedTileCount() is the number needed to more than cover the floor after rotation', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(250)
+      })
+      test('percentage waste when tiles are rotated is still non-zero', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(7)
+      })
+    })
+    describe('when tile width does not divide either, tile length only divides floor length', () => {
+      let floor = new Floor(84, 100, 7, 9)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(144)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(8)
+      })
+      test('calculateRotatedTileCount() is the number needed to more than cover the floor after rotation', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(150)
+      })
+      test('percentage waste when tiles are rotated is still non-zero', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(13)
+      })
+    })
+    describe('when tile width does not divide either, tile length only divides floor width', () => {
+      let floor = new Floor(84, 100, 5, 9)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(204)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(9)
+      })
+      test('calculateRotatedTileCount() is the number needed to more than cover the floor after rotation', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(200)
+      })
+      test('percentage waste when tiles are rotated is still non-zero', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(7)
+      })
+    })
+    describe('when tile width does not divide either, tile length does not divide either', () => {
+      let floor = new Floor(84, 100, 9, 9)
+      test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
+        expect(floor.calculateTileCount()).toBe(120)
+      })
+      test('percentage waste in original orientation is non-zero', () => {
+        expect(floor.calculatePercentageWaste()).toBe(16)
+      })
+      test('calculateRotatedTileCount() is the number needed to more than cover the floor after rotation', () => {
+        expect(floor.calculateRotatedTileCount()).toBe(120)
+      })
+      test('percentage waste when tiles are rotated is still non-zero', () => {
+        expect(floor.calculateRotatedPercentageWaste()).toBe(16)
+      })
+    })
   })
 })
