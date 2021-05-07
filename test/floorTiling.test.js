@@ -14,6 +14,9 @@ describe('Floor', () => {
     test('calculateRotatedTileCount() is 1', () => {
       expect(floor.calculateRotatedTileCount()).toBe(1)
     })
+    test('calculateRotatedPercentageWaste() is 0', () => {
+      expect(floor.calculateRotatedPercentageWaste()).toBe(0)
+    })
   })
   describe('when initiated with tile length & width which divide the floor length & width', () => {
     let floor = new Floor(80, 30, 20, 10);

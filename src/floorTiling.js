@@ -21,6 +21,10 @@ class Floor {
     return this.calculateTileCount()
   }
 
+  calculateRotatedPercentageWaste() {
+    return this.calculatePercentageWaste()
+  }
+
   lengthRatio() {
     return Math.ceil(this.floorLength/this.tileLength)
   }
