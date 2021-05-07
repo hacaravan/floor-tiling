@@ -42,7 +42,7 @@ Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 :construction:  
 Not yet started
 - Assuming only one direction is being reused (for now)
-- Pass in boolean of `canCutLength` in constructor
+- Pass in boolean of `canCutLength` in constructor, defaults to `false`
 - If `canCutLength` is true, calculate the exact division of tile length into the floor length, rather than the ceiling of this
   - This is a slight oversimplification since it assumes you can perfectly cut the tiles at any length
   - Also assuming that adding parts from two cut tiles is OK
@@ -50,3 +50,15 @@ Not yet started
 - That's how many tiles will be used, but you must take the ceiling of this value
 - The wasted area is now the tile area based on the new tile count, minus the floor area
 - Doing it in the opposite orientation with `canCutWidth` should work the same
+
+##### Examples
+| Scenario                                                             | Floor Length | Floor Width | Tile Length | Tile Width | Cutting Allowed | Tile Count | Percentage Waste |
+|----------------------------------------------------------------------|--------------|-------------|-------------|------------|-----------------|------------|------------------|
+| Perfect fit with single tile - no cutting                            |           10 |          10 |          10 |         10 |      FALSE      |          1 |                0 |
+| Perfect fit with single tile - cutting                               |           10 |          10 |          10 |         10 |       TRUE      |          1 |                0 |
+| Perfect fit with multiple tiles - no cutting                         |           80 |          30 |          20 |         10 |      FALSE      |         12 |                0 |
+| Perfect fit with multiple tiles - cutting                            |           80 |          30 |          20 |         10 |       TRUE      |         12 |                0 |
+| Wrong length but remainder divides missing area - no cutting         |           42 |          60 |          10 |         12 |      FALSE      |         25 |               19 |
+| Wrong length but remainder divides missing area - cutting            |           42 |          60 |          10 |         12 |       TRUE      |         21 |                0 |
+| Wrong length and remainder does not divide missing area - no cutting |           42 |          60 |           8 |         12 |      FALSE      |         30 |               14 |
+| Wrong length and remainder does not divide missing area - cutting    |           42 |          60 |           8 |         12 |       TRUE      |         27 |                3 |
