@@ -25,24 +25,12 @@ class Floor {
     return Math.ceil(this.floorWidth/this.tileWidth)
   }
 
-  wastedLength() {
-    return this.lengthRatio() * this.tileLength - this.floorLength
-  }
-
-  wastedLengthArea() {
-    return this.wastedLength() * this.tileWidth * this.widthRatio()
-  }
-
-  wastedWidth() {
-    return this.widthRatio() * this.tileWidth - this.floorWidth
-  }
-
-  wastedWidthArea() {
-    return this.wastedWidth() * this.tileLength * this.lengthRatio()
-  }
-
   wastedArea() {
-    return this.wastedWidthArea() + this.wastedLengthArea()
+    return this.tileArea() - this.floorArea()
+  }
+
+  tileArea() {
+    return this.lengthRatio() * this.tileLength * this.widthRatio() * this.tileWidth
   }
 
   floorArea() {

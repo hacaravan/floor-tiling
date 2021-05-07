@@ -53,5 +53,8 @@ describe('Floor', () => {
     test('calculateTileCount() is number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(4)
     })
+    test('percentage waste counts the total area wasted without double counting excess height & length', () => {
+      expect(floor.calculatePercentageWaste()).toBe(261)
+    })
   })
 })
