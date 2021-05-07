@@ -41,11 +41,17 @@ describe('Floor', () => {
   })
   describe('when initiated with a width & length that do not fit perfectly', () => {
     let floor = new Floor(89, 35, 15, 12);
-    test('calculateTileCount() is the number of tiles needed to cover the length and more than cover the width', () => {
+    test('calculateTileCount() is the number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(18)
     })
     test('percentage waste is the area of tiles wasted as proportion of floor to nearest whole number', () => {
       expect(floor.calculatePercentageWaste()).toBe(4)
+    })
+  })
+  describe('when one tile very nearly fills the space so there is a lot of waste', () => {
+    let floor = new Floor(20, 20, 19, 19);
+    test('calculateTileCount() is number of tiles needed to more than cover the length and width', () => {
+      expect(floor.calculateTileCount()).toBe(4)
     })
   })
 })
