@@ -57,4 +57,13 @@ describe('Floor', () => {
       expect(floor.calculatePercentageWaste()).toBe(261)
     })
   })
+  describe('when the floor area is large and the tiles do not fit perfectly in either direction', () => {
+    let floor = new Floor(1234, 897, 22, 14)
+    test('calculateTileCount() is number of tiles needed to more than cover the length and width', () => {
+      expect(floor.calculateTileCount()).toBe(3705)
+    })
+    test('percentage waste is the area of tiles wasted as proportion of floor to nearest whole number', () => {
+      expect(floor.calculatePercentageWaste()).toBe(3)
+    })
+  })
 })
