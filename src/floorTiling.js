@@ -18,13 +18,11 @@ class Floor {
   }
 
   calculateRotatedTileCount() {
-    let rotatedFloor = new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
-    return rotatedFloor.calculateTileCount()
+    return this.rotatedTileFloor().calculateTileCount()
   }
 
   calculateRotatedPercentageWaste() {
-    let rotatedFloor = new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
-    return rotatedFloor.calculatePercentageWaste()
+    return this.rotatedTileFloor().calculatePercentageWaste()
   }
 
   lengthRatio() {
@@ -47,6 +45,9 @@ class Floor {
     return this.floorWidth * this.floorLength
   }
 
+  rotatedTileFloor() {
+    return new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
+  }
 }
 
 module.exports = Floor
