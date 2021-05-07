@@ -72,4 +72,19 @@ describe('Floor', () => {
       expect(floor.calculatePercentageWaste()).toBe(3)
     })
   })
+  describe('when initiated with tile width and length that each divide the floor length and width', () => {
+    let floor = new Floor(42, 84, 7, 6)
+    test('calculateTileCount() is number of tiles needed to perfectly cover the floor in normal orientation', () => {
+      expect(floor.calculateTileCount()).toBe(84)
+    })
+    test('percentage waste is 0', () => {
+      expect(floor.calculatePercentageWaste()).toBe(0)
+    })
+    test('calculateRotatedTileCount() is same as normal tile count', () => {
+      expect(floor.calculateTileCount()).toBe(84)
+    })
+    test('rotated percentage waste is still 0', () => {
+      expect(floor.calculatePercentageWaste()).toBe(0)
+    })
+  })
 })
