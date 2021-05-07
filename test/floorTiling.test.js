@@ -3,13 +3,16 @@
 const Floor = require('../src/floorTiling.js')
 
 describe('Floor', () => {
-  describe('when initiated with a tile size the same as the floor size', () => {
+  describe('when initiated with a square tile the same size as the floor', () => {
     let floor = new Floor(10, 10, 10, 10);
     test('calculateTileCount() is 1', () => {
       expect(floor.calculateTileCount()).toBe(1)
     })
     test('calculatePercentageWaste() is 0', () => {
       expect(floor.calculatePercentageWaste()).toBe(0)
+    })
+    test('calculateRotatedTileCount() is 1', () => {
+      expect(floor.calculateRotatedTileCount()).toBe(1)
     })
   })
   describe('when initiated with tile length & width which divide the floor length & width', () => {

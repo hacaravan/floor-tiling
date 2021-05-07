@@ -17,6 +17,10 @@ class Floor {
     return Math.round(wastedProportion * 100)
   }
 
+  calculateRotatedTileCount() {
+    return this.calculateTileCount()
+  }
+
   lengthRatio() {
     return Math.ceil(this.floorLength/this.tileLength)
   }
