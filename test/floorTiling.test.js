@@ -314,4 +314,15 @@ describe('Floor', () => {
       })
     })
   })
+  describe('effect of cutting', () => {
+    describe('on single tile which perfectly fits floor', () => {
+      let floor = new Floor(10, 10, 10, 10, true);
+      test('tile count is still 1', () => {
+        expect(floor.calculateTileCount()).toEqual(1)
+      })
+      test('waste percentage is still 0', () => {
+        expect(floor.calculatePercentageWaste()).toEqual(0)
+      })
+    })
+  })
 })
