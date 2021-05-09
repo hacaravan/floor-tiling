@@ -62,3 +62,7 @@ Not yet started
 | Wrong length but remainder divides missing area - cutting            |           42 |          60 |          10 |         12 |       TRUE      |         21 |                0 |
 | Wrong length and remainder does not divide missing area - no cutting |           42 |          60 |           8 |         12 |      FALSE      |         30 |               14 |
 | Wrong length and remainder does not divide missing area - cutting    |           42 |          60 |           8 |         12 |       TRUE      |         27 |                3 |
+| Wrong length and width but remainder divides missing area - no cutting         |           42 |          60 |          10 |         12 |      FALSE      |         25 |               19 |
+| Wrong length and width but remainder divides missing area - cutting            |           42 |          60 |          10 |         12 |       TRUE      |         21 |                0 |
+| Wrong length and width and remainder does not divide missing area - no cutting |           42 |          60 |           8 |         12 |      FALSE      |         30 |               14 |
+| Wrong length and width and remainder does not divide missing area - cutting    |           42 |          60 |           8 |         12 |       TRUE      |         27 |                3 |
