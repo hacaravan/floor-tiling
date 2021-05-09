@@ -1,12 +1,12 @@
 'use strict'
 
 class Floor {
-  constructor (floorLength, floorWidth, tileLength, tileWidth, canCutLength = false) {
-    this.floorLength = floorLength;
-    this.floorWidth = floorWidth;
-    this.tileLength = tileLength;
-    this.tileWidth = tileWidth;
-    this.canCutLength = canCutLength
+  constructor (params) {
+    this.floorLength = params.floorLength;
+    this.floorWidth = params.floorWidth;
+    this.tileLength = params.tileLength;
+    this.tileWidth = params.tileWidth;
+    this.canCutLength = params.canCutLength;
   }
 
   calculateTileCount() {
@@ -56,7 +56,13 @@ class Floor {
   }
 
   rotatedTileFloor() {
-    return new Floor(this.floorLength, this.floorWidth, this.tileWidth, this.tileLength)
+    return new Floor({
+      floorLength: this.floorLength,
+      floorWidth: this.floorWidth,
+      tileLength: this.tileWidth,
+      tileWidth: this.tileLength
+    })
+    // The same floor but with tile width and length swapped
   }
 }
 

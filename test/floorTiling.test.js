@@ -4,7 +4,7 @@ const Floor = require('../src/floorTiling.js')
 
 describe('Floor', () => {
   describe('when initiated with a square tile the same size as the floor', () => {
-    let floor = new Floor(10, 10, 10, 10);
+    let floor = new Floor({floorLength: 10, floorWidth: 10, tileLength: 10, tileWidth: 10});
     test('calculateTileCount() is 1', () => {
       expect(floor.calculateTileCount()).toBe(1)
     })
@@ -19,7 +19,7 @@ describe('Floor', () => {
     })
   })
   describe('when initiated with tile length & width which divide the floor length & width', () => {
-    let floor = new Floor(80, 30, 20, 10);
+    let floor = new Floor({floorLength: 80, floorWidth: 30, tileLength: 20, tileWidth: 10});
     test('calculateTileCount() is the number of tiles that fit into the space', () => {
       expect(floor.calculateTileCount()).toBe(12)
     })
@@ -28,7 +28,7 @@ describe('Floor', () => {
     })
   })
   describe('when initiated with a length that does not fit perfectly & width which does', () => {
-    let floor = new Floor(85, 45, 30, 3);
+    let floor = new Floor({floorLength: 85, floorWidth: 45, tileLength: 30, tileWidth: 3});
     test('calculateTileCount() is the number of tiles needed to cover the width and more than cover the length', () => {
       expect(floor.calculateTileCount()).toBe(45)
     })
@@ -37,7 +37,7 @@ describe('Floor', () => {
     })
   })
   describe('when initiated with a width that does not fit perfectly & length which does', () => {
-    let floor = new Floor(45, 85, 3, 30);
+    let floor = new Floor({floorLength: 45, floorWidth: 85, tileLength: 3, tileWidth: 30});
     test('calculateTileCount() is the number of tiles needed to cover the length and more than cover the width', () => {
       expect(floor.calculateTileCount()).toBe(45)
     })
@@ -46,7 +46,7 @@ describe('Floor', () => {
     })
   })
   describe('when initiated with a width & length that do not fit perfectly', () => {
-    let floor = new Floor(89, 35, 15, 12);
+    let floor = new Floor({floorLength: 89, floorWidth: 35, tileLength: 15, tileWidth: 12});
     test('calculateTileCount() is the number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(18)
     })
@@ -55,7 +55,7 @@ describe('Floor', () => {
     })
   })
   describe('when one tile very nearly fills the space so there is a lot of waste', () => {
-    let floor = new Floor(20, 20, 19, 19);
+    let floor = new Floor({floorLength: 20, floorWidth: 20, tileLength: 19, tileWidth: 19});
     test('calculateTileCount() is number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(4)
     })
@@ -64,7 +64,7 @@ describe('Floor', () => {
     })
   })
   describe('when the floor area is large and the tiles do not fit perfectly in either direction', () => {
-    let floor = new Floor(1234, 897, 22, 14)
+    let floor = new Floor({floorLength: 1234, floorWidth: 897, tileLength: 22, tileWidth: 14})
     test('calculateTileCount() is number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(3705)
     })
@@ -73,7 +73,7 @@ describe('Floor', () => {
     })
   })
   describe('when initiated with tile width and length that each divide the floor length and width', () => {
-    let floor = new Floor(42, 84, 7, 6)
+    let floor = new Floor({floorLength: 42, floorWidth: 84, tileLength: 7, tileWidth: 6})
     test('calculateTileCount() is number of tiles needed to perfectly cover the floor in normal orientation', () => {
       expect(floor.calculateTileCount()).toBe(84)
     })
@@ -89,7 +89,7 @@ describe('Floor', () => {
   })
   describe('effect of rotation', () => {
     describe('when tile width divides floor width and length, tile length only divides floor length', () => {
-      let floor = new Floor(84, 100, 7, 4)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 7, tileWidth: 4})
       test('calculateTileCount() is the number needed to cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(300)
       })
@@ -104,7 +104,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width divides floor width and length, tile length only divides floor width', () => {
-      let floor = new Floor(84, 100, 5, 4)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 5, tileWidth: 4})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(425)
       })
@@ -119,7 +119,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width divides floor width and length, tile length does not divide either', () => {
-      let floor = new Floor(84, 100, 9, 4)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 9, tileWidth: 4})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(250)
       })
@@ -134,7 +134,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor width, tile length divides floor length and width', () => {
-      let floor = new Floor(84, 100, 4, 5)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 4, tileWidth: 5})
       test('calculateTileCount() is the number needed to cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(420)
       })
@@ -149,7 +149,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor width, tile length only divides floor length', () => {
-      let floor = new Floor(84, 100, 7, 5)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 7, tileWidth: 5})
       test('calculateTileCount() is the number needed to perfectly cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(240)
       })
@@ -164,7 +164,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor width, tile length only divides floor width', () => {
-      let floor = new Floor(84, 100, 5, 5)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 5, tileWidth: 5})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(340)
       })
@@ -179,7 +179,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor width, tile length does not divide either', () => {
-      let floor = new Floor(84, 100, 9, 5)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 9, tileWidth: 5})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(200)
       })
@@ -194,7 +194,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor length, tile length divides floor length and width', () => {
-      let floor = new Floor(84, 100, 4, 7)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 4, tileWidth: 7})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(315)
       })
@@ -209,7 +209,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor length, tile length only divides floor length', () => {
-      let floor = new Floor(84, 100, 7, 7)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 7, tileWidth: 7})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(180)
       })
@@ -224,7 +224,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor length, tile length only divides floor width', () => {
-      let floor = new Floor(84, 100, 5, 7)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 5, tileWidth: 7})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(255)
       })
@@ -239,7 +239,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width only divides floor length, tile length does not divide either', () => {
-      let floor = new Floor(84, 100, 9, 7)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 9, tileWidth: 7})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(150)
       })
@@ -254,7 +254,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width does not divide either, tile length divides floor length and width', () => {
-      let floor = new Floor(84, 100, 4, 9)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 4, tileWidth: 9})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(252)
       })
@@ -269,7 +269,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width does not divide either, tile length only divides floor length', () => {
-      let floor = new Floor(84, 100, 7, 9)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 7, tileWidth: 9})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(144)
       })
@@ -284,7 +284,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width does not divide either, tile length only divides floor width', () => {
-      let floor = new Floor(84, 100, 5, 9)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 5, tileWidth: 9})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(204)
       })
@@ -299,7 +299,7 @@ describe('Floor', () => {
       })
     })
     describe('when tile width does not divide either, tile length does not divide either', () => {
-      let floor = new Floor(84, 100, 9, 9)
+      let floor = new Floor({floorLength: 84, floorWidth: 100, tileLength: 9, tileWidth: 9})
       test('calculateTileCount() is the number needed to more than cover the floor in original orientation', () => {
         expect(floor.calculateTileCount()).toBe(120)
       })
@@ -316,7 +316,7 @@ describe('Floor', () => {
   })
   describe('effect of cutting', () => {
     describe('on single tile which perfectly fits floor', () => {
-      let floor = new Floor(10, 10, 10, 10, true);
+      let floor = new Floor({floorLength: 10, floorWidth: 10, tileLength: 10, tileWidth: 10, canCutLength: true});
       test('tile count is still 1', () => {
         expect(floor.calculateTileCount()).toBe(1)
       })
@@ -325,7 +325,7 @@ describe('Floor', () => {
       })
     })
     describe('on multiples tiles which cover floor perfectly', () => {
-      let floor = new Floor(80, 30, 20, 10, true);
+      let floor = new Floor({floorLength: 80, floorWidth: 30, tileLength: 20, tileWidth: 10, canCutLength: true});
       test('tile count is still the same', () => {
         expect(floor.calculateTileCount()).toBe(12)
       })
@@ -335,8 +335,8 @@ describe('Floor', () => {
     })
     describe('when the tiles do not fit lengthways', () => {
       describe('when the excess length multiplied by the number of tiles wide is a whole number', () => {
-        let noCutFloor = new Floor(42, 60, 10, 12, false)
-        let cutFloor = new Floor(42, 60, 10, 12, true)
+        let noCutFloor = new Floor({floorLength: 42, floorWidth: 60, tileLength: 10, tileWidth: 12, canCutLength: false})
+        let cutFloor = new Floor({floorLength: 42, floorWidth: 60, tileLength: 10, tileWidth: 12, canCutLength: true})
         describe('without cutting', () => {
           test('there are more tiles needed', () => {
             expect(noCutFloor.calculateTileCount()).toBe(25)
@@ -355,8 +355,8 @@ describe('Floor', () => {
         })
       })
       describe('when the excess length cannot all be used', () => {
-        let noCutFloor = new Floor(42, 60, 8, 12, false)
-        let cutFloor = new Floor(42, 60, 8, 12, true)
+        let noCutFloor = new Floor({floorLength: 42, floorWidth: 60, tileLength: 8, tileWidth: 12, canCutLength: false})
+        let cutFloor = new Floor({floorLength: 42, floorWidth: 60, tileLength: 8, tileWidth: 12, canCutLength: true})
         describe('without cutting', () => {
           test('there are more tiles needed', () => {
             expect(noCutFloor.calculateTileCount()).toBe(30)
