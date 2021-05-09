@@ -324,5 +324,14 @@ describe('Floor', () => {
         expect(floor.calculatePercentageWaste()).toEqual(0)
       })
     })
+    describe('on multiples tiles which cover floor perfectly', () => {
+      let floor = new Floor(80, 30, 20, 10, true);
+      test('tile count is still the same', () => {
+        expect(floor.calculateTileCount()).toEqual(12)
+      })
+      test('waste percentage is still 0', () => {
+        expect(floor.calculatePercentageWaste()).toEqual(0)
+      })
+    })
   })
 })
