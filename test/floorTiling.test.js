@@ -4,7 +4,7 @@ const Floor = require('../src/floorTiling.js')
 
 describe('Floor', () => {
   describe('when initiated with a square tile the same size as the floor', () => {
-    let floor = new Floor({floorLength: 10, floorWidth: 10, tileLength: 10, tileWidth: 10});
+    let floor = new Floor({floorLength: 10, floorWidth: 10, tileLength: 10, tileWidth: 10, costPerTile: 5});
     test('calculateTileCount() is 1', () => {
       expect(floor.calculateTileCount()).toBe(1)
     })
@@ -17,41 +17,56 @@ describe('Floor', () => {
     test('calculateRotatedPercentageWaste() is 0', () => {
       expect(floor.calculateRotatedPercentageWaste()).toBe(0)
     })
+    test('total cost is cost of one tile', () => {
+      expect(floor.calculateTotalCost()).toBe(5)
+    })
   })
   describe('when initiated with tile length & width which divide the floor length & width', () => {
-    let floor = new Floor({floorLength: 80, floorWidth: 30, tileLength: 20, tileWidth: 10});
+    let floor = new Floor({floorLength: 80, floorWidth: 30, tileLength: 20, tileWidth: 10, costPerTile: 5});
     test('calculateTileCount() is the number of tiles that fit into the space', () => {
       expect(floor.calculateTileCount()).toBe(12)
     })
     test('calculatePercentageWaste() is 0', () => {
       expect(floor.calculatePercentageWaste()).toBe(0)
     })
+    test('total cost is cost per tile multiplied by number of tiles needed', () => {
+      expect(floor.calculateTotalCost()).toBe(60)
+    })
   })
   describe('when initiated with a length that does not fit perfectly & width which does', () => {
-    let floor = new Floor({floorLength: 85, floorWidth: 45, tileLength: 30, tileWidth: 3});
+    let floor = new Floor({floorLength: 85, floorWidth: 45, tileLength: 30, tileWidth: 3, costPerTile: 10});
     test('calculateTileCount() is the number of tiles needed to cover the width and more than cover the length', () => {
       expect(floor.calculateTileCount()).toBe(45)
     })
     test('calculatePercentageWaste() is the area of wasted tiles as proportion of floor to nearest whole number', () => {
       expect(floor.calculatePercentageWaste()).toBe(6)
     })
+    test('total cost is cost per tile ultiplied by whole number of tiles needed', () => {
+      expect(floor.calculateTotalCost()).toBe(450)
+    })
   })
   describe('when initiated with a width that does not fit perfectly & length which does', () => {
-    let floor = new Floor({floorLength: 45, floorWidth: 85, tileLength: 3, tileWidth: 30});
+    let floor = new Floor({floorLength: 45, floorWidth: 85, tileLength: 3, tileWidth: 30, costPerTile: 20});
     test('calculateTileCount() is the number of tiles needed to cover the length and more than cover the width', () => {
       expect(floor.calculateTileCount()).toBe(45)
     })
     test('percentage waste is the area of tiles wasted as proportion of floor to nearest whole number', () => {
       expect(floor.calculatePercentageWaste()).toBe(6)
     })
+    test('total cost is cost per tile ultiplied by whole number of tiles needed', () => {
+      expect(floor.calculateTotalCost()).toBe(900)
+    })
   })
   describe('when initiated with a width & length that do not fit perfectly', () => {
-    let floor = new Floor({floorLength: 89, floorWidth: 35, tileLength: 15, tileWidth: 12});
+    let floor = new Floor({floorLength: 89, floorWidth: 35, tileLength: 15, tileWidth: 12, costPerTile: 15});
     test('calculateTileCount() is the number of tiles needed to more than cover the length and width', () => {
       expect(floor.calculateTileCount()).toBe(18)
     })
     test('percentage waste is the area of tiles wasted as proportion of floor to nearest whole number', () => {
       expect(floor.calculatePercentageWaste()).toBe(4)
+    })
+    test('total cost is cost per tile ultiplied by whole number of tiles needed', () => {
+      expect(floor.calculateTotalCost()).toBe(270)
     })
   })
   describe('when one tile very nearly fills the space so there is a lot of waste', () => {

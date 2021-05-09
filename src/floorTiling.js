@@ -7,6 +7,7 @@ class Floor {
     this.tileLength = params.tileLength;
     this.tileWidth = params.tileWidth;
     this.canCutLength = params.canCutLength;
+    this.costPerTile = params.costPerTile;
   }
 
   calculateTileCount() {
@@ -26,6 +27,10 @@ class Floor {
 
   calculateRotatedPercentageWaste() {
     return this.rotatedTileFloor().calculatePercentageWaste()
+  }
+
+  calculateTotalCost() {
+    return this.costPerTile * this.calculateTileCount();
   }
 
   lengthRatio() {
