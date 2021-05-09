@@ -314,7 +314,7 @@ describe('Floor', () => {
       })
     })
   })
-  describe('effect of cutting', () => {
+  describe('effect of cutting the length', () => {
     describe('on single tile which perfectly fits floor', () => {
       let floor = new Floor({floorLength: 10, floorWidth: 10, tileLength: 10, tileWidth: 10, canCutLength: true});
       test('tile count is still 1', () => {
@@ -371,6 +371,48 @@ describe('Floor', () => {
           })
           test('the percentage waste is still non-zero, but is lower', () => {
             expect(cutFloor.calculatePercentageWaste()).toBe(3)
+          })
+        })
+      })
+    })
+    describe('when the tiles do not fit lengthways or widthways', () => {
+      describe('when the excess length multiplied by the number of tiles wide is a whole number', () => {
+        let noCutFloor = new Floor({floorLength: 42, floorWidth: 55, tileLength: 10, tileWidth: 12, canCutLength: false})
+        let cutFloor = new Floor({floorLength: 42, floorWidth: 55, tileLength: 10, tileWidth: 12, canCutLength: true})
+        describe('without cutting', () => {
+          test('there are more tiles needed', () => {
+            expect(noCutFloor.calculateTileCount()).toBe(25)
+          })
+          test('there is non-zero waste', () => {
+            expect(noCutFloor.calculatePercentageWaste()).toBe(30)
+          })
+        })
+        describe('with cutting', () => {
+          test('the tile count is lower', () => {
+            expect(cutFloor.calculateTileCount()).toBe(21)
+          })
+          test('the percentage waste is lower but still non-zero due tothe excess width', () => {
+            expect(cutFloor.calculatePercentageWaste()).toBe(9)
+          })
+        })
+      })
+      describe('when the excess length cannot be spread evenly over the width of all the tiles', () => {
+        let noCutFloor = new Floor({floorLength: 42, floorWidth: 55, tileLength: 8, tileWidth: 12, canCutLength: false})
+        let cutFloor = new Floor({floorLength: 42, floorWidth: 55, tileLength: 8, tileWidth: 12, canCutLength: true})
+        describe('without cutting', () => {
+          test('there are more tiles needed', () => {
+            expect(noCutFloor.calculateTileCount()).toBe(30)
+          })
+          test('there is non-zero waste', () => {
+            expect(noCutFloor.calculatePercentageWaste()).toBe(25)
+          })
+        })
+        describe('with cutting', () => {
+          test('the tile count is lower but still does not fit perfectly', () => {
+            expect(cutFloor.calculateTileCount()).toBe(27)
+          })
+          test('the percentage waste is still non-zero, but is lower', () => {
+            expect(cutFloor.calculatePercentageWaste()).toBe(12)
           })
         })
       })
