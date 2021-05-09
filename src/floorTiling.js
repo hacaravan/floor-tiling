@@ -27,7 +27,8 @@ class Floor {
   }
 
   lengthRatio() {
-    return this.canCutLength ? this.floorLength/this.tileLength : Math.ceil(this.floorLength/this.tileLength)
+    let exactRatio = this.floorLength/this.tileLength
+    return this.canCutLength ? exactRatio : Math.ceil(exactRatio)
   }
 
   widthRatio() {
