@@ -10,7 +10,9 @@ class Floor {
   }
 
   calculateTileCount() {
-    return this.lengthRatio() * this.widthRatio()
+    return Math.ceil(this.lengthRatio() * this.widthRatio())
+    // Take the ceiling for the case when cutting is allowed since you still
+    // have to use a whole tile, even if some of it can be cut up and used
   }
 
   calculatePercentageWaste() {
@@ -29,6 +31,8 @@ class Floor {
   lengthRatio() {
     let exactRatio = this.floorLength/this.tileLength
     return this.canCutLength ? exactRatio : Math.ceil(exactRatio)
+    // if cutting is allowed, you can fit partial tiles, so can use exact ratio
+    // Otherwise you have to use a whole tile if there's overlap
   }
 
   widthRatio() {
@@ -40,7 +44,7 @@ class Floor {
   }
 
   tileArea() {
-    return this.lengthRatio() * this.tileLength * this.widthRatio() * this.tileWidth
+    return this.calculateTileCount() * this.tileLength * this.tileWidth
   }
 
   floorArea() {

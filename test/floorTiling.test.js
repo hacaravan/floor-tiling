@@ -349,6 +349,29 @@ describe('Floor', () => {
           test('the tile count is lower', () => {
             expect(cutFloor.calculateTileCount()).toBe(21)
           })
+          test('the percentage waste is 0', () => {
+            expect(cutFloor.calculatePercentageWaste()).toBe(0)
+          })
+        })
+      })
+      describe('when the excess length cannot all be used', () => {
+        let noCutFloor = new Floor(42, 60, 8, 12, false)
+        let cutFloor = new Floor(42, 60, 8, 12, true)
+        describe('without cutting', () => {
+          test('there are more tiles needed', () => {
+            expect(noCutFloor.calculateTileCount()).toBe(30)
+          })
+          test('there is non-zero waste', () => {
+            expect(noCutFloor.calculatePercentageWaste()).toBe(14)
+          })
+        })
+        describe('with cutting', () => {
+          test('the tile count is lower but still does not fit perfectly', () => {
+            expect(cutFloor.calculateTileCount()).toBe(27)
+          })
+          test('the percentage waste is still non-zero, but is lower', () => {
+            expect(cutFloor.calculatePercentageWaste()).toBe(3)
+          })
         })
       })
     })
