@@ -318,19 +318,38 @@ describe('Floor', () => {
     describe('on single tile which perfectly fits floor', () => {
       let floor = new Floor(10, 10, 10, 10, true);
       test('tile count is still 1', () => {
-        expect(floor.calculateTileCount()).toEqual(1)
+        expect(floor.calculateTileCount()).toBe(1)
       })
       test('waste percentage is still 0', () => {
-        expect(floor.calculatePercentageWaste()).toEqual(0)
+        expect(floor.calculatePercentageWaste()).toBe(0)
       })
     })
     describe('on multiples tiles which cover floor perfectly', () => {
       let floor = new Floor(80, 30, 20, 10, true);
       test('tile count is still the same', () => {
-        expect(floor.calculateTileCount()).toEqual(12)
+        expect(floor.calculateTileCount()).toBe(12)
       })
       test('waste percentage is still 0', () => {
-        expect(floor.calculatePercentageWaste()).toEqual(0)
+        expect(floor.calculatePercentageWaste()).toBe(0)
+      })
+    })
+    describe('when the tiles do not fit lengthways', () => {
+      describe('when the excess length multiplied by the number of tiles wide is a whole number', () => {
+        let noCutFloor = new Floor(42, 60, 10, 12, false)
+        let cutFloor = new Floor(42, 60, 10, 12, true)
+        describe('without cutting', () => {
+          test('there are more tiles needed', () => {
+            expect(noCutFloor.calculateTileCount()).toBe(25)
+          })
+          test('there is non-zero waste', () => {
+            expect(noCutFloor.calculatePercentageWaste()).toBe(19)
+          })
+        })
+        describe('with cutting', () => {
+          test('the tile count is lower', () => {
+            expect(cutFloor.calculateTileCount()).toBe(21)
+          })
+        })
       })
     })
   })

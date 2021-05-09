@@ -1,11 +1,12 @@
 'use strict'
 
 class Floor {
-  constructor (floorLength, floorWidth, tileLength, tileWidth) {
+  constructor (floorLength, floorWidth, tileLength, tileWidth, canCutLength = false) {
     this.floorLength = floorLength;
     this.floorWidth = floorWidth;
     this.tileLength = tileLength;
     this.tileWidth = tileWidth;
+    this.canCutLength = canCutLength
   }
 
   calculateTileCount() {
@@ -26,7 +27,7 @@ class Floor {
   }
 
   lengthRatio() {
-    return Math.ceil(this.floorLength/this.tileLength)
+    return this.canCutLength ? this.floorLength/this.tileLength : Math.ceil(this.floorLength/this.tileLength)
   }
 
   widthRatio() {
