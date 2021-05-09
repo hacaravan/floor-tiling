@@ -39,9 +39,8 @@ Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 - Each draws on the original versions of the functions but with a new instance of the `Floor` class, with length and width of tiles swapped
 
 #### Extension B
-:construction:  
-Not yet started
-- Assuming only one direction is being reused (for now)
+- Currently only cutting tiles to shorten them (i.e. changing length, not width)
+- Currently also not factoring in combined effect of rotation and cutting
 - Pass in boolean of `canCutLength` in constructor, defaults to `false`
 - If `canCutLength` is true, calculate the exact division of tile length into the floor length, rather than the ceiling of this
   - This is a slight oversimplification since it assumes you can perfectly cut the tiles at any length
