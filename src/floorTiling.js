@@ -40,11 +40,15 @@ class Floor {
   }
 
   wastedArea() {
-    return this.tileArea() - this.floorArea()
+    return this.totalTileArea() - this.floorArea()
+  }
+
+  totalTileArea() {
+    return this.calculateTileCount() * this.tileArea()
   }
 
   tileArea() {
-    return this.calculateTileCount() * this.tileLength * this.tileWidth
+    return this.tileLength * this.tileWidth
   }
 
   floorArea() {
