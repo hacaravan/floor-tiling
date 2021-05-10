@@ -66,11 +66,35 @@ describe('tileComparison', () => {
                                         {tileLength: 6, tileWidth: 12, costPerTile: 20},
                                         {tileLength: 7, tileWidth: 12, costPerTile: 100},
                                         {tileLength: 3, tileWidth: 6, costPerTile: 5},
-                                        {tileLength: 6, tileWidth: 24, costPerTile: 40}
+                                        {tileLength: 3, tileWidth: 12, costPerTile: 10}
                                       ]
                                       })
       test('returns an array with the indexes of all the cheapest tiles', () => {
         expect(comparison.findCheapestTile()).toEqual([0, 2, 3])
+      })
+    })
+    describe('when passed an expensive tile which covers the floor well and a cheap tile that is wasteful', () => {
+      describe('when the better coverage outweighs the cheaper cost per area', () => {
+        let comparison = new Comparison({floorLength: 42, floorWidth: 60,
+                                        tileList: [
+                                          {tileLength: 8, tileWidth: 7, costPerTile: 10},
+                                          {tileLength: 6, tileWidth: 12, costPerTile: 15}
+                                        ]
+                                        })
+        test('returns an array with the index of the tile that is cheaper overall but more expensive per area', () => {
+          expect(comparison.findCheapestTile()).toEqual([1])
+        })
+      })
+      describe('when the cheaper cost per area outweighs the better coverage', () => {
+        let comparison = new Comparison({floorLength: 42, floorWidth: 60,
+                                        tileList: [
+                                          {tileLength: 8, tileWidth: 7, costPerTile: 5},
+                                          {tileLength: 6, tileWidth: 12, costPerTile: 10}
+                                        ]
+                                        })
+        test('returns an array with the index of the tile that is cheaper overall but more expensive per area', () => {
+          expect(comparison.findCheapestTile()).toEqual([0])
+        })
       })
     })
   })
