@@ -43,8 +43,34 @@ describe('tileComparison', () => {
                                         {tileLength: 3, tileWidth: 10, costPerTile: 20}
                                       ]
                                       })
-      test('returns an array with 0 and 1 in it, i.e. both indexes', () => {
+      test('returns an array with the index of the cheapest tile', () => {
         expect(comparison.findCheapestTile()).toEqual([2])
+      })
+    })
+    describe('when passed multiple tiles with two equal cheapest to cover the floor', () => {
+      let comparison = new Comparison({floorLength: 42, floorWidth: 60,
+                                      tileList: [
+                                        {tileLength: 6, tileWidth: 12, costPerTile: 20},
+                                        {tileLength: 7, tileWidth: 12, costPerTile: 100},
+                                        {tileLength: 3, tileWidth: 6, costPerTile: 5},
+                                        {tileLength: 14, tileWidth: 6, costPerTile: 50}
+                                      ]
+                                      })
+      test('returns an array with the indexes of the two cheapest tiles', () => {
+        expect(comparison.findCheapestTile()).toEqual([0, 2])
+      })
+    })
+    describe('when passed multiple tiles with multiple equal cheapest to cover the floor', () => {
+      let comparison = new Comparison({floorLength: 42, floorWidth: 60,
+                                      tileList: [
+                                        {tileLength: 6, tileWidth: 12, costPerTile: 20},
+                                        {tileLength: 7, tileWidth: 12, costPerTile: 100},
+                                        {tileLength: 3, tileWidth: 6, costPerTile: 5},
+                                        {tileLength: 6, tileWidth: 24, costPerTile: 40}
+                                      ]
+                                      })
+      test('returns an array with the indexes of all the cheapest tiles', () => {
+        expect(comparison.findCheapestTile()).toEqual([0, 2, 3])
       })
     })
   })
