@@ -65,7 +65,7 @@ describe('Floor', () => {
     test('percentage waste is the area of tiles wasted as proportion of floor to nearest whole number', () => {
       expect(floor.calculatePercentageWaste()).toBe(4)
     })
-    test('total cost is cost per tile ultiplied by whole number of tiles needed', () => {
+    test('total cost is cost per tile multiplied by whole number of tiles needed', () => {
       expect(floor.calculateTotalCost()).toBe(270)
     })
   })
