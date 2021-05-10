@@ -5,10 +5,10 @@ class Comparison{
     this.tileList = params.tileList
   }
   findCheapestTile() {
-
-    if (this.tileList.length === 1) {
+    let tilingCostList = this.tileList.map((tile, index) => this.tilingCost(index))
+    if (tilingCostList.length === 1) {
       return [0]
-    } else if (this.tilingCost(0) === this.tilingCost(1)){
+    } else if (tilingCostList[0] === tilingCostList[1]){
       return [0, 1]
     }
     else {
