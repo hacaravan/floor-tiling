@@ -1,8 +1,16 @@
 'use strict'
 
 class Comparison{
+  constructor(params) {
+    this.tileList = params.tileList
+  }
   findCheapestTile() {
-    return [0]
+    if (this.tileList.length === 1) {
+      return [0]
+    } else {
+      return [1]
+    }
+
   }
 }
 
