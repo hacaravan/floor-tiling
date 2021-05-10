@@ -65,3 +65,23 @@ Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 | Wrong length and width but remainder divides missing area - cutting            |           42 |          60 |          10 |         12 |       TRUE      |         21 |                0 |
 | Wrong length and width and remainder does not divide missing area - no cutting |           42 |          60 |           8 |         12 |      FALSE      |         30 |               14 |
 | Wrong length and width and remainder does not divide missing area - cutting    |           42 |          60 |           8 |         12 |       TRUE      |         27 |                3 |
+
+#### Extension C
+- Separate class, `Comparison`
+- Feed into it a single floor dimension and array with multiple tile shapes & costs
+- So input like `{floorLength: x, floorWidth: y, tileList: [{tileLength: a, tileWidth: b, costPerTile: c}, {tileLength d, ...}, ...] }`
+- `findCheapestTile()` outputs array with 0(?)-based index of cheapest tile
+- If there is a tie, output array has several indices
+- For now assume no rotation and no cutting
+- Could easily add `findCheapestCost()` by returning the `totalCost` of the cheapest tile option
+
+##### Examples
+| Scenario                                               | floorLength | floorWidth | tileList                                                                                                                                                                                                      | findCheapestTile() |
+|--------------------------------------------------------|-------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| Only one tile                                          |          40 |         25 | {tileLength: 8, tileWidth: 5, costPerTile: 10}                                                                                                                                                                | [0]                |
+| Two tiles with different costs                         |          42 |         27 | {tileLength: 6, tileWidth: 9, costPerTile: 10}, <br>{tileLength: 3, tileWidth: 9, costPerTile: 4}                                                                                                             | [1]                |
+| Two tiles with same costs                              |          42 |         27 | {tileLength: 6, tileWidth: 9, costPerTile: 10}, <br>{tileLength: 3, tileWidth: 9, costPerTile: 5}                                                                                                             | [0, 1]             |
+| Multiple tiles, one outright cheapest                  |          42 |         60 | {tileLength: 3, tileWidth: 6, costPerTile: 4}, <br>{tileLength: 3, tileWidth: 10, costPerTile: 5}, <br>{tileLength: 6, tileWidth: 12, costPerTile: 10}                                                        | [2]                |
+| Multiple tiles, two same price                         |          42 |         60 | {tileLength: 6, tileWidth: 12, costPerTile: 20}, <br>{tileLength: 7, tileWidth: 12, costPerTile: 100}, <br>{tileLength: 3, tileWidth: 6, costPerTile: 5}, <br>{tileLength: 14, tileWidth: 6, costPerTile: 50} | [0, 2]             |
+| Multiple tiles, multiple same price                    |          42 |         60 | {tileLength: 6, tileWidth: 12, costPerTile: 20}, <br>{tileLength: 7, tileWidth: 12, costPerTile: 100}, <br>{tileLength: 3, tileWidth: 6, costPerTile: 5}, <br>{tileLength: 6, tileWidth: 24, costPerTile: 40} | [0, 2, 3]          |
+| Cheap wasteful tile cheaper than expensive perfect fit |          42 |         60 | {tileLength: 8, tileWidth: 7, costPerTile: 5}, <br>{tileLength: 6, tileWidth: 12, costPerTile: 10}                                                                                                            | [1]                |
