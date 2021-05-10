@@ -1,13 +1,12 @@
 'use strict'
 
+const Floor = require ('./floor.js')
+const Tile = require ('./tile.js')
+
 class FloorTiling {
-  constructor (params) {
-    this.floorLength = params.floorLength;
-    this.floorWidth = params.floorWidth;
-    this.tileLength = params.tileLength;
-    this.tileWidth = params.tileWidth;
-    this.canCutLength = params.canCutLength;
-    this.costPerTile = params.costPerTile;
+  constructor (floor, tile) {
+    this.floor = floor;
+    this.tile = tile;
   }
 
   calculateTileCount() {
@@ -17,7 +16,7 @@ class FloorTiling {
   }
 
   calculatePercentageWaste() {
-    let wastedProportion = this.wastedArea()/this.floorArea()
+    let wastedProportion = this.wastedArea()/this.floor.area()
     return Math.round(wastedProportion * 100)
   }
 
@@ -30,45 +29,44 @@ class FloorTiling {
   }
 
   calculateTotalCost() {
-    return this.costPerTile * this.calculateTileCount();
+    return this.tile.costPerTile * this.calculateTileCount();
   }
 
   lengthRatio() {
-    let exactRatio = this.floorLength/this.tileLength
-    return this.canCutLength ? exactRatio : Math.ceil(exactRatio)
+    let exactRatio = this.floor.length/this.tile.length
+    return this.tile.canCutLength ? exactRatio : Math.ceil(exactRatio)
     // if cutting is allowed, you can fit partial tiles, so can use exact ratio
     // Otherwise you have to use a whole tile if there's overlap
   }
 
   widthRatio() {
-    return Math.ceil(this.floorWidth/this.tileWidth)
+    return Math.ceil(this.floor.width/this.tile.width)
   }
 
   wastedArea() {
-    return this.totalTileArea() - this.floorArea()
+    return this.totalTileArea() - this.floor.area()
   }
 
   totalTileArea() {
-    return this.calculateTileCount() * this.tileArea()
+    return this.calculateTileCount() * this.tile.area()
   }
 
-  tileArea() {
-    return this.tileLength * this.tileWidth
-  }
+  // tileArea() {
+  //   return this.tileLength * this.tileWidth
+  // }
 
-  floorArea() {
-    return this.floorWidth * this.floorLength
-  }
+  // floorArea() {
+  //   return this.floorWidth * this.floorLength
+  // }
 
   rotatedTileFloor() {
-    return new FloorTiling({
-      floorLength: this.floorLength,
-      floorWidth: this.floorWidth,
-      tileLength: this.tileWidth,
-      tileWidth: this.tileLength
-    })
+    let rotatedTile = new Tile({length: this.tile.width,
+                              width: this.tile.length,
+                              costPerTile: this.tile.costPerTile,
+                              canCutLength: this.tile.canCutLength})
+    return new FloorTiling(this.floor, rotatedTile)
     // The same floor but with tile width and length swapped
   }
 }
 
-module.exports = FloorTiling
+module.exports = {FloorTiling, Floor, Tile}
