@@ -71,7 +71,7 @@ Large Area |1234 | 897 | 22 | 14 | 3705 | 3
 - Feed into it a single floor dimension and array with multiple tile shapes & costs
 - So input like `{floorLength: x, floorWidth: y, tileList: [{tileLength: a, tileWidth: b, costPerTile: c}, {tileLength d, ...}, ...] }`
 - `findCheapestTile()` outputs array with 0(?)-based index of cheapest tile
-- If there is a tie, output array has several indices
+- If there is a tie, output array has several indexes
 - For now assume no rotation and no cutting
 - Could easily add `findCheapestCost()` by returning the `totalCost` of the cheapest tile option
 
