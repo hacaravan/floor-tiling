@@ -1,6 +1,6 @@
 'use strict'
 
-const Floor = require('./floorTiling.js')
+const FloorTiling = require('./floorTiling.js')
 
 class Comparison{
   constructor(params) {
@@ -28,7 +28,7 @@ class Comparison{
 
   tilingCost(tileNumber) {
     let tile = this.tileList[tileNumber]
-    let floor = new Floor({floorLength: this.floorLength, floorWidth: this.floorWidth,
+    let floor = new FloorTiling({floorLength: this.floorLength, floorWidth: this.floorWidth,
                           tileLength: tile.tileLength, tileWidth: tile.tileWidth, costPerTile: tile.costPerTile})
     return floor.calculateTotalCost()
   }

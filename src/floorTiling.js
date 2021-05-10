@@ -1,6 +1,6 @@
 'use strict'
 
-class Floor {
+class FloorTiling {
   constructor (params) {
     this.floorLength = params.floorLength;
     this.floorWidth = params.floorWidth;
@@ -61,7 +61,7 @@ class Floor {
   }
 
   rotatedTileFloor() {
-    return new Floor({
+    return new FloorTiling({
       floorLength: this.floorLength,
       floorWidth: this.floorWidth,
       tileLength: this.tileWidth,
@@ -71,4 +71,4 @@ class Floor {
   }
 }
 
-module.exports = Floor
+module.exports = FloorTiling
