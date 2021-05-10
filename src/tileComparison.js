@@ -1,11 +1,10 @@
 'use strict'
 
-const FloorTiling = require('./floorTiling.js')
+const {FloorTiling, Floor, Tile} = require('./floorTiling.js')
 
 class Comparison{
   constructor(params) {
-    this.floorLength = params.floorLength;
-    this.floorWidth = params.floorWidth;
+    this.floor = new Floor({length: params.floorLength, width: params.floorWidth})
     this.tileList = params.tileList
   }
   findCheapestTile() {
@@ -27,9 +26,8 @@ class Comparison{
   }
 
   tilingCost(tileNumber) {
-    let tile = this.tileList[tileNumber]
-    let floor = new FloorTiling({floorLength: this.floorLength, floorWidth: this.floorWidth,
-                          tileLength: tile.tileLength, tileWidth: tile.tileWidth, costPerTile: tile.costPerTile})
+    let tile = new Tile(this.tileList[tileNumber])
+    let floor = new FloorTiling(this.floor, tile)
     return floor.calculateTotalCost()
   }
 }
