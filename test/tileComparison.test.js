@@ -34,5 +34,18 @@ describe('tileComparison', () => {
         expect(comparison.findCheapestTile()).toEqual([0, 1])
       })
     })
+    describe('when passed multiple tiles with one outright cheapest to cover the floor', () => {
+      let comparison = new Comparison({floorLength: 42, floorWidth: 60,
+                                      tileList: [
+                                        {tileLength: 3, tileWidth: 6, costPerTile: 4},
+                                        {tileLength: 3, tileWidth: 10, costPerTile: 5},
+                                        {tileLength: 6, tileWidth: 12, costPerTile: 10},
+                                        {tileLength: 3, tileWidth: 10, costPerTile: 20}
+                                      ]
+                                      })
+      test('returns an array with 0 and 1 in it, i.e. both indexes', () => {
+        expect(comparison.findCheapestTile()).toEqual([2])
+      })
+    })
   })
 })

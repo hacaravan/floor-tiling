@@ -6,14 +6,14 @@ class Comparison{
   }
   findCheapestTile() {
     let tilingCostList = this.tileList.map((tile, index) => this.tilingCost(index))
-    if (tilingCostList.length === 1) {
-      return [0]
-    } else if (tilingCostList[0] === tilingCostList[1]){
-      return [0, 1]
+    let cheapestCost = Math.min(...tilingCostList)
+    let returnArr = []
+    for(let i = 0; i < tilingCostList.length; i++){
+      if(tilingCostList[i] === cheapestCost) {
+        returnArr.push(i)
+      }
     }
-    else {
-      return [1]
-    }
+    return returnArr;
   }
   tilingCost(tileNumber) {
     let tile = this.tileList[tileNumber]
